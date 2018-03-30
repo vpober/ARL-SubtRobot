@@ -7,7 +7,7 @@ project(kangaroo_x2_driver)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS serial)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -99,8 +99,8 @@ find_package(catkin REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES kangaroo_x2_driver
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -109,12 +109,41 @@ catkin_package(
 ## Build ##
 ###########
 
+set(kangaroo_SRCS
+    src/Kangaroo/KangarooChannel.cpp
+    src/Kangaroo/KangarooCommandWriter.cpp
+    src/Kangaroo/KangarooCRC.cpp
+    src/Kangaroo/KangarooMonitor.cpp
+    src/Kangaroo/KangarooReplyReader.cpp
+    src/Kangaroo/KangarooReplyReceiver.cpp
+    src/Kangaroo/KangarooSerial.cpp
+    src/Kangaroo/KangarooStatus.cpp
+    src/Kangaroo/KangarooTimeout.cpp
+    src/Arduino.cpp
+)
+
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
+ include
+ src/Kangaroo
+ ${catkin_INCLUDE_DIRS}
 )
+
+add_library(${PROJECT_NAME} ${kangaroo_SRCS})
+
+#add_executable(kangaroo_driver_node src/kangaroo_driver_node.cpp)
+#add_dependencies(kangaroo_driver_node ${PROJECT_NAME})
+#target_link_libraries(kangaroo_driver_node ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+add_executable(MixedModeExample examples/MixedMode.cpp)
+add_dependencies(MixedModeExample ${PROJECT_NAME})
+target_link_libraries(MixedModeExample ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+add_executable(SpeedControlExample examples/SpeedControl.cpp)
+add_dependencies(SpeedControlExample ${PROJECT_NAME})
+target_link_libraries(SpeedControlExample ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
