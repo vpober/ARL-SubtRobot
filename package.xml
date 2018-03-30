@@ -50,6 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>serial</build_depend>
+  <depend>controller_manager</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

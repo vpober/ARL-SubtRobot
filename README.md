@@ -13,3 +13,12 @@ To test the connection to the motor driver:
 rosrun kangaroo_x2_driver SpeedControlExample
 ```
 (this will run motor 1 back and forward)
+
+To create separate controllers for motors 1 and 2:
+```
+roslaunch independent_speed_control.launch
+```
+The controllers listen for speed commands of type std_msgs/Float64 on topics: 
+/motor_1_controller/command
+/motor_2_controller/command
+

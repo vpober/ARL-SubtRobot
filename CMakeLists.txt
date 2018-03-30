@@ -7,7 +7,12 @@ project(kangaroo_x2_driver)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS serial)
+find_package(catkin REQUIRED COMPONENTS 
+    serial
+    roscpp
+    controller_manager
+    hardware_interface
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -133,9 +138,9 @@ include_directories(
 
 add_library(${PROJECT_NAME} ${kangaroo_SRCS})
 
-#add_executable(kangaroo_driver_node src/kangaroo_driver_node.cpp)
-#add_dependencies(kangaroo_driver_node ${PROJECT_NAME})
-#target_link_libraries(kangaroo_driver_node ${PROJECT_NAME} ${catkin_LIBRARIES})
+add_executable(kangaroo_driver_node src/kangaroo_x2_driver_node.cpp)
+add_dependencies(kangaroo_driver_node ${PROJECT_NAME})
+target_link_libraries(kangaroo_driver_node ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 add_executable(MixedModeExample examples/MixedMode.cpp)
 add_dependencies(MixedModeExample ${PROJECT_NAME})

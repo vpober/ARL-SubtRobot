@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <rosparam file="$(find kangaroo_x2_driver)/cfg/independent_control.yaml" command="load"/>
+
+    <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node"/>
+
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+		output="screen" args="motor_1_controller motor_2_controller">
+	</node>
+</launch>
