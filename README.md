@@ -19,6 +19,10 @@ To create separate controllers for motors 1 and 2:
 roslaunch independent_speed_control.launch
 ```
 The controllers listen for speed commands of type std_msgs/Float64 on topics: 
+```
 /motor_1_controller/command
 /motor_2_controller/command
+```
 
+## Setup
+Ensure the kangaroo board is configured for independent mode (dip-switch 4 is ON) and digital input (dip-switch 1 is ON). Also ensure the board has been tuned with these settings.
