@@ -7,3 +7,9 @@ The intention is to use this to control the X2 from a Raspberry Pi through an FT
 
 Kangaroo X2 Arduino library:
 https://www.dimensionengineering.com/info/arduino
+
+To test the connection to the motor driver:
+```
+rosrun kangaroo_x2_driver SpeedControlExample
+```
+(this will run motor 1 back and forward)
