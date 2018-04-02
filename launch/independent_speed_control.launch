@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <rosparam file="$(find kangaroo_x2_driver)/cfg/independent_control.yaml" command="load"/>
+    <rosparam file="$(find kangaroo_x2_driver)/config/independent_control.yaml" command="load"/>
 
     <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node"/>
 
