@@ -16,7 +16,7 @@ rosrun kangaroo_x2_driver SpeedControlExample
 
 ## Create separate controllers for motors 1 and 2:
 ```
-roslaunch independent_speed_control.launch
+roslaunch kangaroo_x2_driver independent_speed_control.launch
 ```
 The controllers listen for speed commands of type std_msgs/Float64 on topics: 
 ```
