@@ -51,6 +51,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>serial</build_depend>
   <depend>controller_manager</depend>
+  <exec_depend>xacro</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
