@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot name="kangaroo_diff_drive" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <!-- Base Link -->
+  <link name="base_link"/>
+
+  <link name="left_wheel">
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder  length="0.03" radius="0.045"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder  length="0.03" radius="0.045"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint type="revolute" name="motor_2_joint">
+    <origin xyz="0 0.15 0" rpy="0 0 0"/>
+    <child link="left_wheel">left_wheel</child>
+    <parent link="base_link">base_link</parent>
+    <axis xyz="0 1 0"/>
+    <limit effort="100" velocity="100.0"  lower="-5000" upper="5000" />
+  </joint> 
+
+  <link name="right_wheel">
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder  length="0.03" radius="0.045"/>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder  length="0.03" radius="0.045"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint type="revolute" name="motor_1_joint">
+    <origin xyz="0 -0.15 0" rpy="0 0 0"/>
+    <child link="right_wheel">right_wheel</child>
+    <parent link="base_link">base_link</parent>
+    <axis xyz="0 1 0"/>
+    <limit effort="100" velocity="100.0"  lower="-5000" upper="5000" />
+  </joint>
+
+</robot>

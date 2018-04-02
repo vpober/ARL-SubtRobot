@@ -1,4 +1,4 @@
-
+#include <math.h>
 #include <ros/ros.h>
 #include <std_msgs/Float64.h>
 #include <controller_manager/controller_manager.h>
@@ -21,6 +21,11 @@ public:
 
     K1.start();
     K2.start();
+    
+    //Ticks to radians conversion: determined by rotating wheel 10 timees, 
+    //then calling 1,getp over simple serial
+    ticksToRadians = 2*M_PI * 10 / 2995; 
+    radiansToTicks = 1/ticksToRadians;
     
     pos_[0] = 0.0; pos_[1] = 0.0;
     vel_[0] = 0.0; vel_[1] = 0.0;
@@ -55,20 +60,22 @@ public:
   void read(){
     ROS_INFO_STREAM("Commands for joints: " << cmd_[0] << ", " << cmd_[1]);
     //send commands to motors
-    K1.s((int32_t) cmd_[0]);
-    K2.s((int32_t) cmd_[1]);
+    K1.s((int32_t)  cmd_[0] * radiansToTicks);
+    K2.s((int32_t) -cmd_[1] * radiansToTicks);
   }
 
   void write(){
-    pos_[0] = K1.getP().value();
-    pos_[1] = K2.getP().value();
-    vel_[0] = K1.getS().value();
-    vel_[1] = K2.getS().value();
+    pos_[0] =  K1.getP().value() * ticksToRadians;
+    pos_[1] = -K2.getP().value() * ticksToRadians;
+    vel_[0] =  K1.getS().value() * ticksToRadians;
+    vel_[1] = -K2.getS().value() * ticksToRadians;
   }
 
 private:
   hardware_interface::JointStateInterface    jnt_state_interface_;
   hardware_interface::VelocityJointInterface jnt_vel_interface_;
+  double ticksToRadians;
+  double radiansToTicks;
   double cmd_[2];
   double pos_[2];
   double vel_[2];

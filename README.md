@@ -8,13 +8,13 @@ The intention is to use this to control the X2 from a Raspberry Pi through an FT
 Kangaroo X2 Arduino library:
 https://www.dimensionengineering.com/info/arduino
 
-To test the connection to the motor driver:
+## Test the connection to the motor driver:
 ```
 rosrun kangaroo_x2_driver SpeedControlExample
 ```
 (this will run motor 1 back and forward)
 
-To create separate controllers for motors 1 and 2:
+## Create separate controllers for motors 1 and 2:
 ```
 roslaunch independent_speed_control.launch
 ```
@@ -24,5 +24,12 @@ The controllers listen for speed commands of type std_msgs/Float64 on topics:
 /motor_2_controller/command
 ```
 
-## Setup
+## Differential drive control:
+```
+roslaunch kangaroo_x2_driver diff_drive_control.launch
+```
+The differential-drive controller will listen for twist velocity commands published to topic `/diff_drive_controller/cmd_vel`.
+
+
+## Kangaroo Setup
 Ensure the kangaroo board is configured for independent mode (dip-switch 4 is ON) and digital input (dip-switch 1 is ON). Also ensure the board has been tuned with these settings.
