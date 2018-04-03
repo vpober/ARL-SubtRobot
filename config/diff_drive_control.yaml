@@ -30,13 +30,13 @@ diff_drive_controller:
         has_velocity_limits    : false
         #max_velocity           : 0.9  # m/s
         #min_velocity           : -0.9 # m/s
-        has_acceleration_limits: true
+        has_acceleration_limits: false 
         max_acceleration       : 15  # m/s^2
         min_acceleration       : -15 # m/s^2
     angular:
       z:
         has_velocity_limits    : false
         #max_velocity           : 0.5  # rad/s
-        has_acceleration_limits: true
+        has_acceleration_limits: false
         max_acceleration       : 50  # rad/s^2
 

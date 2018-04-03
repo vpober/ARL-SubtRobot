@@ -4,7 +4,7 @@
 
     <rosparam file="$(find kangaroo_x2_driver)/config/diff_drive_control.yaml" command="load"/>
 
-    <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node" respawn="true"/>
+    <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node" respawn="true" respawn_delay="10"/>
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
       respawn="false"/>
