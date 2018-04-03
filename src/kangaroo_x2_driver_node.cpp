@@ -19,11 +19,12 @@ public:
     K1(K, '1'),
     K2(K, '2') {
 
-    K1.start();
-    K2.start();
-    
+    startChannels();
+ 
     //Ticks to radians conversion: determined by rotating wheel 10 timees, 
     //then calling 1,getp over simple serial
+    //TODO: implement scaling through KangarooChannel::units call
+    //  also implement optional reversal of motors
     ticksToRadians = 2*M_PI * 10 / 2995; 
     radiansToTicks = 1/ticksToRadians;
     
@@ -65,10 +66,22 @@ public:
   }
 
   void write(){
-    pos_[0] =  K1.getP().value() * ticksToRadians;
-    pos_[1] = -K2.getP().value() * ticksToRadians;
-    vel_[0] =  K1.getS().value() * ticksToRadians;
-    vel_[1] = -K2.getS().value() * ticksToRadians;
+    KangarooStatus resultGetK1P = K1.getP();
+    KangarooStatus resultGetK2P = K2.getP();
+
+    bool allOk = resultGetK1P.ok() && resultGetK2P.ok();
+    if (!allOk){
+        //assume not ok because channels need to be restarted
+        //this happens when kangaroo board is reset
+        //try restarting channels
+        startChannels(); 
+    }
+    else { 
+        pos_[0] =  resultGetK1P.value() * ticksToRadians;
+        pos_[1] = -resultGetK2P.value() * ticksToRadians;
+        vel_[0] =  K1.getS().value() * ticksToRadians;
+        vel_[1] = -K2.getS().value() * ticksToRadians;
+    }
   }
 
 private:
@@ -86,6 +99,14 @@ private:
   KangarooSerial  K;
   KangarooChannel K1;
   KangarooChannel K2;
+
+//set up kangaroo channels
+void startChannels() {
+  ROS_INFO_STREAM("Starting Kangaroo channels");
+  K1.start();
+  K2.start();
+}
+
 };
 
 int main(int argc, char **argv)
@@ -95,6 +116,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "kangaroo_x2");
   ros::NodeHandle nh;
   
+  //TODO: read port and baud as parameters
   string port = "/dev/ttyUSB0";
   unsigned long baud = 9600;
 
