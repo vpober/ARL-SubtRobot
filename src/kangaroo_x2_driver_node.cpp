@@ -24,6 +24,7 @@ public:
     
     //Ticks to radians conversion: determined by rotating wheel 10 timees, 
     //then calling 1,getp over simple serial
+    //TODO: implement scaling with a kangaroo units call after startup
     ticksToRadians = 2*M_PI * 10 / 2995; 
     radiansToTicks = 1/ticksToRadians;
     
@@ -94,7 +95,8 @@ int main(int argc, char **argv)
   
   ros::init(argc, argv, "kangaroo_x2");
   ros::NodeHandle nh;
-  
+ 
+  //TODO: read port and baud as parameters
   string port = "/dev/ttyUSB0";
   unsigned long baud = 9600;
 

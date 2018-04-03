@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="model" default="$(find xacro)/xacro.py '$(find kangaroo_x2_driver)/urdf/kangaroo_diff_drive.xacro'"/>
+    <arg name="model" default="$(find kangaroo_x2_driver)/urdf/kangaroo_diff_drive.xacro"/>
+
     <rosparam file="$(find kangaroo_x2_driver)/config/diff_drive_control.yaml" command="load"/>
 
     <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node"/>
@@ -12,6 +13,6 @@
 		output="screen" args="diff_drive_controller joint_state_controller">
 	</node>
 
-    <param name="robot_description" command="$(arg model)" />
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(arg model)'" />
 
 </launch>
