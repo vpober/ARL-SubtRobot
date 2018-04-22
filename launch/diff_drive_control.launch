@@ -4,14 +4,16 @@
 
     <rosparam file="$(find kangaroo_x2_driver)/config/diff_drive_control.yaml" command="load"/>
 
-    <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node" respawn="true" respawn_delay="10"/>
+    <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node" respawn="true" respawn_delay="10">
+	<remap from="diff_drive_controller/cmd_vel" to="cmd_vel"/>
+	<remap from="diff_drive_controller/odom" to="odom"/>
+    </node>    
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
       respawn="false"/>
 
-	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-		output="screen" args="diff_drive_controller joint_state_controller">
-	</node>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="diff_drive_controller joint_state_controller"/>
 
     <param name="robot_description" command="$(find xacro)/xacro.py '$(arg model)'" />
 
