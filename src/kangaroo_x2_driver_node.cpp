@@ -9,6 +9,22 @@
 
 using namespace std;
 
+
+inline const char* toString(KangarooError err)
+{
+    switch (err)
+    {
+        case KANGAROO_NO_ERROR:         return "KANGAROO_NO_ERROR";
+        case KANGAROO_NOT_STARTED:      return "KANGAROO_NOT_STARTED";
+        case KANGAROO_NOT_HOMED:        return "KANGAROO_NOT_HOMED";
+        case KANGAROO_CONTROL_ERROR:    return "KANGAROO_CONTROL_ERROR";
+        case KANGAROO_WRONG_MODE:       return "KANGAROO_WRONG_MODE";
+        case KANGAROO_SERIAL_TIMEOUT:   return "KANGAROO_SERIAL_TIMEOUT";
+        case KANGAROO_TIMED_OUT:        return "KANGAROO_TIMED_OUT";
+        default:                        return "Unknown error";
+    }
+}
+
 class KangarooX2 : public hardware_interface::RobotHW
 {
 public:
@@ -73,7 +89,18 @@ public:
     if (!allOk){
         //assume not ok because channels need to be restarted
         //this happens when kangaroo board is reset
+        //report error codes, wait a bit, then
         //try restarting channels
+        ROS_ERROR_STREAM(
+            "Kangaroo status not OK" << endl <<
+            "Motor 1 state: " << toString(resultGetK1P.error()) << endl <<
+            "Motor 2 state: " << toString(resultGetK2P.error())
+        );
+        
+        //warning: before adding the sleep statement below, I burnt out
+        //a motor, possbily because of the instant restart on error conditions
+        //(
+        ros::Duration(10).sleep();        
         startChannels(); 
     }
     else { 
