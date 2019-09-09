@@ -6,8 +6,8 @@ Takes a clean copy of the Kangaroo Arduino library provided by Dimension Enginee
 
 The intention is to use this to control the X2 from a Raspberry Pi through an FTDI USB-serial driver.
 
-Kangaroo X2 Arduino library:
-https://www.dimensionengineering.com/info/arduino
+Update: code to use with Teensy for compatability with RC controller 
+
 
 ## Author
 Tim Fan
@@ -16,15 +16,12 @@ original source code https://github.com/tim-fan/kangaroo_x2_driver
 
 Edits by Valerie Pober
 
--added params for serial port connection and baud rate to launch file
-
--added joints and channels for rear axle
-
--updated command directions for wiring
-
--updated urdf file for 4-wheel implementation
-
--updated yaml file for 4-wheel implementation
+- added params for serial port connection and baud rate to launch file
+- added joints and channels for rear axle
+- updated command directions for wiring
+- updated urdf file for 4-wheel implementation
+- updated yaml file for 4-wheel implementation
+- Teensy code for compatability with RC controller
 
 
 
@@ -59,3 +56,21 @@ Ensure the kangaroo board is configured for independent mode (dip-switch 4 is ON
 Change Kangaroo address for rear axle to 129 and Channel 1 Name to '3' and Channel 2 Name to '4' in Describe software.
 
 Enable multi-kangaroo mode for both in Describe software and daisy-chain Kangaroos.
+
+## Teensy Setup
+
+Teensyduino download for Arduino IDE compatability
+https://www.pjrc.com/teensy/td_download.html
+
+#### Add following libraries to Arduino Library directory
+
+Kangaroo X2 Arduino library:
+https://www.dimensionengineering.com/info/arduino
+
+Timer library:
+https://github.com/JChristensen/Timer/archive/v2.1.zip
+
+#### File selection
+
+
+
