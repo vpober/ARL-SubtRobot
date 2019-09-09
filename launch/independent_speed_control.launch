@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <launch>
+
+    <param name = "serialPort" value ="/dev/ttyACM0" type = "str"/>
+    <param name = "baudRate" value = "9600" type = "double"/>
+
     <rosparam file="$(find kangaroo_x2_driver)/config/independent_control.yaml" command="load"/>
 
     <node pkg="kangaroo_x2_driver" type="kangaroo_driver_node" name="kangaroo_node"/>
 
 	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-		output="screen" args="motor_1_controller motor_2_controller">
+		output="screen" args="motor_fr_controller motor_fl_controller motor_rr_controller motor_rl_controller">
 	</node>
 </launch>

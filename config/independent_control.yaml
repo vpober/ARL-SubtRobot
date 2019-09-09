@@ -1,12 +1,24 @@
 
-motor_1_controller:
+motor_fr_controller:
   type: velocity_controllers/JointVelocityController
-  joint: motor_1_joint
+  joint: front_right_motor_joint
   pid:
     p: 5.0
 
-motor_2_controller:
+motor_fl_controller:
   type: velocity_controllers/JointVelocityController
-  joint: motor_2_joint
+  joint: front_left_motor_joint
   pid:
     p: 5.0
+
+motor_rr_controller:
+ type: velocity_controllers/JointVelocityController
+ joint: rear_right_motor_joint
+ pid:
+   p: 5.0
+
+motor_rl_controller:
+ type: velocity_controllers/JointVelocityController
+ joint: rear_left_motor_joint
+ pid:
+   p: 5.0
