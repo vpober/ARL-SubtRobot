@@ -79,6 +79,7 @@ https://github.com/JChristensen/Timer/archive/v2.1.zip
 To calibrate Max and Min RC constant values (D_MAX_RC, D_MIN_RC, T_MAX_RC, T_MIN_RC) use “PulseIn_RC_Calibrate” to determine values
 
 *For serial only*
+
 “TeensySerial”
 
 
