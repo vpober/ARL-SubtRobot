@@ -49,6 +49,12 @@ roslaunch kangaroo_x2_driver diff_drive_control.launch
 ```
 The differential-drive controller will listen for twist velocity commands published to topic `/diff_drive_controller/cmd_vel`.
 
+## System Setup
+*System diagram*
+![System Diagram](https://github.com/vpober/ARL-SubtRobot/blob/master/ARL_Subt_SystemDiagram.jpg)
+
+*General Wiring Diagram*
+![Wiring Diagram](https://github.com/vpober/ARL-SubtRobot/blob/master/ARL_Subt_WiringDiagram.png)
 
 ## Kangaroo Setup
 Ensure the kangaroo board is configured for independent mode (dip-switch 4 is ON) and digital input (dip-switch 1 is ON). Also ensure the board has been tuned with these settings.
@@ -61,9 +67,9 @@ Enable multi-kangaroo mode for both in Describe software and daisy-chain Kangaro
 In order to obtain best accuracy the following dimensions should be modified based on robot implementation:
 - wheel_r
 - length
-- axle width
+- axle_width
 
-The following diagram indicates the dimensions refered to in the URDF file:
+*The following diagram indicates the dimensions refered to in the URDF file:*
 
 ![URDF dimensions](https://github.com/vpober/ARL-SubtRobot/blob/master/urdf/Chassis_URDFdimensions.PNG)
 
