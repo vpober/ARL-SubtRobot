@@ -57,6 +57,16 @@ Change Kangaroo address for rear axle to 129 and Channel 1 Name to '3' and Chann
 
 Enable multi-kangaroo mode for both in Describe software and daisy-chain Kangaroos.
 
+## URDF File dimensions
+In order to obtain best accuracy the following dimensions should be modified based on robot implementation:
+- wheel_r
+- length
+- axle width
+
+The following diagram indicates the dimensions refered to in the URDF file:
+
+![URDF dimensions](https://github.com/vpober/ARL-SubtRobot/blob/master/urdf/Chassis_URDFdimensions.PNG)
+
 ## Teensy Setup
 
 Teensyduino download for Arduino IDE compatability
