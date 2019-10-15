@@ -5,8 +5,7 @@ ROS driver for Kangaroo X2 motor driver board
 Takes a clean copy of the Kangaroo Arduino library provided by Dimension Engineering, and provides a reimplementation of Arduino.h in order to connect to the X2 through a linux serial port instead of Arduino serial. 
 
 The intention is to use this to control the X2 from a Raspberry Pi through an FTDI USB-serial driver.
-
-Update: code to use with Teensy for compatability with RC controller 
+- Update: code to use with Teensy for compatability with RC controller 
 
 
 ## Author
@@ -48,13 +47,29 @@ The controllers listen for speed commands of type std_msgs/Float64 on topics:
 roslaunch kangaroo_x2_driver diff_drive_control.launch
 ```
 The differential-drive controller will listen for twist velocity commands published to topic `/diff_drive_controller/cmd_vel`.
+- Time out after 1 s if no command is received (adjust parameter in yaml files)
+
+Twist message documentation: 
+- http://docs.ros.org/api/geometry_msgs/html/msg/Twist.html
+- http://wiki.ros.org/rostopic
+
+Relevant paramters: linear x-direction (m/s) and angular z-direction (rad/s)
+Example of twist message for 0.5 m/s:
+```
+rostopic pub -r 10 /diff_drive_controller/cmd_vel geometry_msgs/Twist '{linear:  {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+
+```
 
 ## System Setup
 *System diagram*
 ![System Diagram](https://github.com/vpober/ARL-SubtRobot/blob/master/ARL_Subt_SystemDiagram.jpg)
 
-*General Wiring Diagram*
+*General Overview of Wiring*
 ![Wiring Diagram](https://github.com/vpober/ARL-SubtRobot/blob/master/ARL_Subt_WiringDiagram.png)
+
+*4-Wheel robot platform*
+![Image of Robot](https://github.com/vpober/ARL-SubtRobot/blob/master/ARL_SubtRobot.jpg)
 
 ## Kangaroo Setup
 Ensure the kangaroo board is configured for independent mode (dip-switch 4 is ON) and digital input (dip-switch 1 is ON). Also ensure the board has been tuned with these settings.
@@ -69,7 +84,9 @@ In order to obtain best accuracy the following dimensions should be modified bas
 - length
 - axle_width
 
-*The following diagram indicates the dimensions refered to in the URDF file:*
+The other parameters are cosmetic for URDF model
+
+*The following diagram indicates the dimensions referred to in the URDF file:*
 
 ![URDF dimensions](https://github.com/vpober/ARL-SubtRobot/blob/master/urdf/Chassis_URDFdimensions.PNG)
 
