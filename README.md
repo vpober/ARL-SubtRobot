@@ -54,6 +54,7 @@ Twist message documentation:
 - http://wiki.ros.org/rostopic
 
 Relevant paramters: linear x-direction (m/s) and angular z-direction (rad/s)
+
 Example of twist message for 0.5 m/s:
 ```
 rostopic pub -r 10 /diff_drive_controller/cmd_vel geometry_msgs/Twist '{linear:  {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
